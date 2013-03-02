@@ -44,4 +44,9 @@ class DatabaseLayer extends DatabaseConnection
 
        return $returnSet;
     }
+
+    public function InsertTask($task) {
+        self::$mysql->query("INSERT INTO entries (Task, Start) VALUES ('". $task ."', '". date("Y-m-d H:i:s", time()) ."')");
+        self::$mysql->commit();
+    }
 }

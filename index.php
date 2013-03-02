@@ -4,7 +4,6 @@ ini_set('display_errors',1);
 error_reporting(E_ALL);
 
 include('includes/DatabaseLayer.php');
-
 $dbLayer = DatabaseLayer::getInstance();
 
 ?>
@@ -18,14 +17,27 @@ $dbLayer = DatabaseLayer::getInstance();
 </head>
     <body>
         <script src="http://code.jquery.com/jquery.js"></script>
+        <script src="js/jquery.dateFormat-1.0.js"></script>
         <script src="js/bootstrap.js"></script>
+        <script src="js/main.js"></script>
 
         <div class="container">
-
             <h1>Timetracker</h1>
+            <h2>New Entry</h2>
+            <div id="message"></div>
+            <div id="entry_form">
+                <form name="entry" action="">
+                    <fieldset>
+                        <div class="input-append">
+                            <input type="text" name="task" id="task" size="30" value="" placeholder="Task..." />
+                            <input type="submit" name="submit" class="btn" id="submit_btn" value="Send" />
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
             <h2>Entries</h2>
 
-            <table class="table table-striped">
+            <table id="table-entries" class="table table-striped">
                 <thead>
                     <tr>
                         <th>
@@ -33,9 +45,6 @@ $dbLayer = DatabaseLayer::getInstance();
                         </th>
                         <th>
                             Start
-                        </th>
-                        <th>
-                            Stop
                         </th>
                     </tr>
                 </thead>
@@ -47,10 +56,7 @@ $dbLayer = DatabaseLayer::getInstance();
                             <?php echo $value['Task'] ?>
                         </td>
                         <td>
-                            <?php echo $value['Start'] ?>
-                        </td>
-                        <td>
-                            <?php echo $value['Stop'] ?>
+                            <?php echo (new DateTime($value['Start']))->format('Y-m-d H:i'); ?>
                         </td>
                     </tr>
                 <?php }
