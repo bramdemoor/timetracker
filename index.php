@@ -3,8 +3,7 @@
 ini_set('display_errors',1);
 error_reporting(E_ALL);
 
-include('includes/DatabaseLayer.php');
-$dbLayer = DatabaseLayer::getInstance();
+include('includes/TaskController.php');
 
 ?>
 
@@ -49,7 +48,7 @@ $dbLayer = DatabaseLayer::getInstance();
                     </tr>
                 </thead>
             <?php
-                $entries = $dbLayer->getAllEntries();
+                $entries = getAllEntries();
                 foreach($entries as &$value) { ?>
                     <tr>
                         <td>

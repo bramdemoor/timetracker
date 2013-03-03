@@ -6,7 +6,6 @@ function __autoload($class_name) {
 
 class DatabaseLayer extends DatabaseConnection
 {
-
     private static $m_pInstance;
 
     public static function getInstance()
@@ -45,8 +44,8 @@ class DatabaseLayer extends DatabaseConnection
        return $returnSet;
     }
 
-    public function InsertTask($task) {
-        self::$mysql->query("INSERT INTO entries (Task, Start) VALUES ('". $task ."', '". date("Y-m-d H:i:s", time()) ."')");
+    public function insertTask($task, $start) {
+        self::$mysql->query("INSERT INTO entries (Task, Start) VALUES ('". $task ."', '". date("Y-m-d H:i:s", $start) ."')");
         self::$mysql->commit();
     }
 }
