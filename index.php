@@ -13,11 +13,13 @@ include('includes/TaskController.php');
     <title>Timetracker</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="css/bootstrap.css" rel="stylesheet" media="screen">
+    <link href="bootstrap-editable-1/bootstrap-editable/css/bootstrap-editable.css" rel="stylesheet">
 </head>
     <body>
         <script src="http://code.jquery.com/jquery.js"></script>
         <script src="js/jquery.dateFormat-1.0.js"></script>
         <script src="js/bootstrap.js"></script>
+        <script src="bootstrap-editable-1/bootstrap-editable/js/bootstrap-editable.js"></script>
         <script src="js/main.js"></script>
 
         <div class="container">
@@ -51,7 +53,7 @@ include('includes/TaskController.php');
                 $entries = getAllEntries();
                 foreach($entries as &$value) { ?>
                     <tr>
-                        <td>
+                        <td class="task-field" data-pk="<?php echo $value['Id'] ?>">
                             <?php echo $value['Task'] ?>
                         </td>
                         <td>
@@ -64,6 +66,7 @@ include('includes/TaskController.php');
         </div>
     </body>
 </html>
+
 
 
 

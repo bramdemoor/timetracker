@@ -48,4 +48,9 @@ class DatabaseLayer extends DatabaseConnection
         self::$mysql->query("INSERT INTO entries (Task, Start) VALUES ('". $task ."', '". date("Y-m-d H:i:s", $start) ."')");
         self::$mysql->commit();
     }
+
+    public function updateTaskDescription($id, $task) {
+        self::$mysql->query("UPDATE entries SET Task='". $task ."' WHERE Id='". $id ."'");
+        self::$mysql->commit();
+    }
 }

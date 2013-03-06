@@ -1,4 +1,23 @@
 $(function() {
+
+    $.fn.editable.defaults.mode = 'inline';
+
+    $('.task-field').editable({
+        type: 'text',
+        id: 'Task',
+        url: '/TaskController.php',
+        title: 'Enter new value...',
+        params: function(params) {
+            params.action = 'updateTaskDescription';
+            return params;
+        },
+        ajaxOptions: {
+            type: 'POST',
+            url: 'includes/TaskController.php'
+
+        }
+    });
+
     $('#submit_btn').click(function() {
         var task = $('input#task').val();
         var start = new Date().getTime();
