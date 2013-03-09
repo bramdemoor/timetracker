@@ -13,6 +13,7 @@ include('includes/TaskController.php');
     <title>Timetracker</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="css/bootstrap.css" rel="stylesheet" media="screen">
+    <link href="css/main.css" rel="stylesheet" media="screen">
     <link href="bootstrap-editable-1/bootstrap-editable/css/bootstrap-editable.css" rel="stylesheet">
 </head>
     <body>
@@ -56,7 +57,7 @@ include('includes/TaskController.php');
                         <td class="task-field" data-pk="<?php echo $value['Id'] ?>">
                             <?php echo $value['Task'] ?>
                         </td>
-                        <td>
+                        <td class="datetime-field">
                             <?php echo (new DateTime($value['Start']))->format('Y-m-d H:i'); ?>
                         </td>
                     </tr>
