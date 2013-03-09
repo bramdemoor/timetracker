@@ -1,4 +1,14 @@
 $(function() {
+    $(".task-entry").hover(
+        function() { $(this).children(".button-group").children(".remove-btn, .edit-btn").show(); },
+        function() { $(this).children(".button-group").children(".remove-btn, .edit-btn").hide(); }
+    );
+
+    $('.edit-btn').click(function(e) {
+        e.stopPropagation();
+        var currentTablerow = $(this).closest('tr');
+        currentTablerow.children(".task-field").editable('toggle');
+    });
 
     $.fn.editable.defaults.mode = 'inline';
 
@@ -6,6 +16,9 @@ $(function() {
         type: 'text',
         id: 'Task',
         url: '/TaskController.php',
+        toggle: 'manual',
+        inputclass:'input-inline-text',
+        showbuttons: false,
         title: 'Enter new value...',
         params: function(params) {
             params.action = 'updateTaskDescription';
@@ -27,7 +40,7 @@ $(function() {
             url: 'includes/TaskController.php',
             data: dataString,
             success: function() {
-                $('#table-entries tr:last').after('<tr><td>'+ task +'</td><td>'+ $.format.date(start, "yyyy-MM-dd HH:mm") +'</td></tr>');
+                $('#table-entries tr:last').after('<tr><td class="task-field" >'+ task +'</td><td class="datetime-field">'+ $.format.date(start, "yyyy-MM-dd HH:mm") +'</td><td class="button-group"><a href="#" class="remove-btn"><i class="icon-remove"></i></a></td></tr>');
                 $('input#task').val('');
             }
         });

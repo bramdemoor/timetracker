@@ -1,6 +1,39 @@
+tr.task-entry {
+    border-top: 1px solid #dddddd;
+}
+
+tr.task-entry td {
+    border-top: none !important;
+}
+
 .editable-click {
-    border-bottom: 1px solid #dddddd !important;
+    border-bottom: none !important;
+    width: 740px;
 }
 .datetime-field {
-    border-bottom: 1px solid #dddddd !important;
+    border-bottom: none !important;
+    width: 130px;
 }
+
+.button-group {
+    border-bottom: none !important;
+    width: 50px;
+    text-align: center;
+}
+
+.remove-btn {
+    display: none;
+}
+
+.edit-btn {
+    display: none;
+}
+
+.editable-inline.editable-container {
+    margin-top: 3px;
+}
+
+.input-inline-text {
+    width: 680px;
+}
+

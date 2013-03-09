@@ -17,7 +17,7 @@ include('includes/TaskController.php');
     <link href="bootstrap-editable-1/bootstrap-editable/css/bootstrap-editable.css" rel="stylesheet">
 </head>
     <body>
-        <script src="http://code.jquery.com/jquery.js"></script>
+        <script src="js/jquery-1.9.1.min.js"></script>
         <script src="js/jquery.dateFormat-1.0.js"></script>
         <script src="js/bootstrap.js"></script>
         <script src="bootstrap-editable-1/bootstrap-editable/js/bootstrap-editable.js"></script>
@@ -32,7 +32,7 @@ include('includes/TaskController.php');
                     <fieldset>
                         <div class="input-append">
                             <input type="text" name="task" id="task" size="30" value="" placeholder="Task..." />
-                            <input type="submit" name="submit" class="btn" id="submit_btn" value="Send" />
+                            <button id="submit_btn" class="btn" type="button"><i class="icon-plus"></i></button>
                         </div>
                     </fieldset>
                 </form>
@@ -53,12 +53,16 @@ include('includes/TaskController.php');
             <?php
                 $entries = getAllEntries();
                 foreach($entries as &$value) { ?>
-                    <tr>
+                    <tr class="task-entry">
                         <td class="task-field" data-pk="<?php echo $value['Id'] ?>">
                             <?php echo $value['Task'] ?>
                         </td>
                         <td class="datetime-field">
                             <?php echo (new DateTime($value['Start']))->format('Y-m-d H:i'); ?>
+                        </td>
+                        <td class="button-group">
+                            <a href="#" class="edit-btn"><i class="icon-edit"></i></a>
+                            <a href="#" class="remove-btn"><i class="icon-remove"></i></a>
                         </td>
                     </tr>
                 <?php }
