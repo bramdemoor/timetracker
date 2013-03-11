@@ -59,4 +59,21 @@ class DatabaseLayer extends DatabaseConnection
         self::$mysql->commit();
     }
 
+    public function getDistinctItems() {
+        $result = self::$mysql->query("SELECT DISTINCT Task FROM entries", MYSQLI_STORE_RESULT);
+
+        if($result == null)  {
+            echo self::$mysql->error;
+            exit;
+        }
+
+        $returnSet = array();
+        while($picksRow = $result->fetch_array(MYSQLI_ASSOC)) {
+            array_push($returnSet, $picksRow);
+        }
+
+        $result->free();
+
+        return $returnSet;
+    }
 }

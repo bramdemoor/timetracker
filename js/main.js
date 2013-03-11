@@ -1,4 +1,19 @@
 $(function() {
+
+    var taskItems = [];
+
+    $.getJSON(
+        'includes/TaskController.php',
+        'action=getEntryNames',
+        function($data) {
+            taskItems = $data;
+        }
+    );
+
+    function getTaskItems() {
+        return taskItems;
+    }
+
     $(".task-entry").hover(
         function() { $(this).children(".button-group").children(".remove-btn, .edit-btn").show(); },
         function() { $(this).children(".button-group").children(".remove-btn, .edit-btn").hide(); }
@@ -28,10 +43,11 @@ $(function() {
     $.fn.editable.defaults.mode = 'inline';
 
     $('.task-field').editable({
-        type: 'text',
+        type: 'typeahead',
         id: 'Task',
         url: '/TaskController.php',
         toggle: 'manual',
+        source: getTaskItems,
         inputclass:'input-inline-text',
         showbuttons: false,
         title: 'Enter new value...',

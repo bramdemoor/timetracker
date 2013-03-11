@@ -11,6 +11,13 @@ if(isset($_POST['action']) && !empty($_POST['action'])) {
     }
 }
 
+if(isset($_GET['action']) && !empty($_GET['action'])) {
+    $action = $_GET['action'];
+    switch($action) {
+        case 'getEntryNames' : getEntryNames(); break;
+    }
+}
+
 function createNewTask() {
     $task = $_POST['task'];
     $start = time();
@@ -30,6 +37,12 @@ function getAllEntries() {
 function removeEntry() {
     $id = $_POST['pk'];
     DatabaseLayer::getInstance()->deleteEntry($id);
+}
+
+function getEntryNames() {
+    $arr = DatabaseLayer::getInstance()->getDistinctItems();
+    header('Content-Type: application/json');
+    echo json_encode($arr);
 }
 
 
