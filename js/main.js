@@ -10,6 +10,21 @@ $(function() {
         currentTablerow.children(".task-field").editable('toggle');
     });
 
+    $('.remove-btn').click(function() {
+        var $id = $(this).closest('tr').children('.task-field').attr('data-pk');
+        var dataString = 'action=removeEntry&pk=' + $id;
+        var rowElement = $(this).closest('tr');
+        $.ajax({
+            type: 'POST',
+            url: 'includes/TaskController.php',
+            data: dataString,
+            success: function() {
+                rowElement.remove();
+            }
+        });
+        return false;
+    });
+
     $.fn.editable.defaults.mode = 'inline';
 
     $('.task-field').editable({

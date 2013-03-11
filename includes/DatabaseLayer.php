@@ -53,4 +53,10 @@ class DatabaseLayer extends DatabaseConnection
         self::$mysql->query("UPDATE entries SET Task='". $task ."' WHERE Id='". $id ."'");
         self::$mysql->commit();
     }
+
+    public function deleteEntry($id) {
+        self::$mysql->query("DELETE from entries WHERE Id='". $id ."'");
+        self::$mysql->commit();
+    }
+
 }

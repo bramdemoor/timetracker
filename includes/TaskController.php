@@ -7,6 +7,7 @@ if(isset($_POST['action']) && !empty($_POST['action'])) {
     switch($action) {
         case 'createNewTask' : createNewTask();break;
         case 'updateTaskDescription' : updateTaskDescription();break;
+        case 'removeEntry' : removeEntry(); break;
     }
 }
 
@@ -24,6 +25,11 @@ function updateTaskDescription() {
 
 function getAllEntries() {
     return DatabaseLayer::getInstance()->getAllEntries();
+}
+
+function removeEntry() {
+    $id = $_POST['pk'];
+    DatabaseLayer::getInstance()->deleteEntry($id);
 }
 
 
