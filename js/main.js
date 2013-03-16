@@ -1,5 +1,23 @@
 $(function() {
 
+    $('#tscode-txt').typeahead( {
+        minLength: 1,
+        source: function(typeahead, query) {
+            $.ajax({
+                type: 'GET',
+                url: 'includes/TaskController.php',
+                data: 'action=getTsCodes',
+                dataType: 'json',
+                success: function(data) {
+                    console.log("tscode called");
+                    console.log(data);
+                    typeahead.process(data);
+                }
+            })
+        },
+        property: 'TSCode'
+    });
+
     $('#task-txt').typeahead( {
         minLength: 1,
             source: function(typeahead, query) {
@@ -75,6 +93,7 @@ $(function() {
             success: function() {
                 $('#table-entries tr:last').after('<tr><td class="tscode-field" >'+ tscode +'</td><td class="task-field" >'+ task +'</td><td class="datetime-field">'+ $.format.date(start, "yyyy-MM-dd HH:mm") +'</td><td class="button-group"><a href="#" class="edit-btn" style="display: none;"><i class="icon-edit"></i></a><a href="#" class="remove-btn" style="display: none;"><i class="icon-remove"></i></a></td></tr>');
                 $('input#task-txt').val('');
+                $('input#tscode-txt').val('');
             }
         });
         return false;

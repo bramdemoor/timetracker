@@ -33,7 +33,7 @@ include('includes/TaskController.php');
                 <form name="entry" action="">
                     <fieldset>
                         <div class="input-append">
-                            <input type="text" name="task" id="tscode-txt" size="30" value="" placeholder="Timesheetcode..." />
+                            <input type="text" name="task" id="tscode-txt" data-provide="typeahead" autocomplete="off" size="30" value="" placeholder="Timesheetcode..." />
                             <input type="text" name="task" id="task-txt" data-provide="typeahead" autocomplete="off" size="30" value="" placeholder="Task..." />
                             <button id="submit_btn" class="btn" type="button"><i class="icon-plus"></i></button>
                         </div>

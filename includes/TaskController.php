@@ -18,6 +18,7 @@ if(isset($_GET['action']) && !empty($_GET['action'])) {
     $action = $_GET['action'];
     switch($action) {
         case 'getEntryNames' : getEntryNames(); break;
+        case 'getTsCodes' : getTsCodes(); break;
     }
 }
 
@@ -45,6 +46,12 @@ function removeEntry() {
 
 function getEntryNames() {
     $arr = DatabaseLayer::getInstance()->getDistinctItems();
+    header('Content-Type: application/json');
+    echo json_encode($arr);
+}
+
+function getTsCodes() {
+    $arr = DatabaseLayer::getInstance()->getDistinctTsCodes();
     header('Content-Type: application/json');
     echo json_encode($arr);
 }

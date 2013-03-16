@@ -8,7 +8,7 @@ tr.task-entry td {
 
 .editable-click {
     border-bottom: none !important;
-    width: 540px;
+    width: 530px;
 }
 
 .tscode-field {
@@ -45,7 +45,7 @@ tr.task-entry td {
 }
 
 .input-inline-text {
-    width: 680px;
+    width: 300px !important;
 }
 
 #task-txt {
