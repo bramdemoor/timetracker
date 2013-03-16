@@ -1,18 +1,21 @@
 $(function() {
 
-    var taskItems = [];
-
-    $.getJSON(
-        'includes/TaskController.php',
-        'action=getEntryNames',
-        function($data) {
-            taskItems = $data;
-        }
-    );
-
-    function getTaskItems() {
-        return taskItems;
-    }
+    $('#task-txt').typeahead( {
+        minLength: 1,
+            source: function(typeahead, query) {
+                $.ajax({
+                    type: 'GET',
+                    url: 'includes/TaskController.php',
+                    data: 'action=getEntryNames',
+                    dataType: 'json',
+                    success: function(data) {
+                        console.log(data);
+                        typeahead.process(data);
+                    }
+                })
+        },
+        property: 'Task'
+    });
 
     $(".task-entry").hover(
         function() { $(this).children(".button-group").children(".remove-btn, .edit-btn").show(); },
@@ -43,11 +46,10 @@ $(function() {
     $.fn.editable.defaults.mode = 'inline';
 
     $('.task-field').editable({
-        type: 'typeahead',
+        type: 'text',
         id: 'Task',
         url: '/TaskController.php',
         toggle: 'manual',
-        source: getTaskItems,
         inputclass:'input-inline-text',
         showbuttons: false,
         title: 'Enter new value...',
@@ -58,12 +60,11 @@ $(function() {
         ajaxOptions: {
             type: 'POST',
             url: 'includes/TaskController.php'
-
         }
     });
 
     $('#submit_btn').click(function() {
-        var task = $('input#task').val();
+        var task = $('input#task-txt').val();
         var start = new Date().getTime();
         var dataString = 'action=createNewTask&task='+ task +'&start='+ start;
         $.ajax({
@@ -72,7 +73,7 @@ $(function() {
             data: dataString,
             success: function() {
                 $('#table-entries tr:last').after('<tr><td class="task-field" >'+ task +'</td><td class="datetime-field">'+ $.format.date(start, "yyyy-MM-dd HH:mm") +'</td><td class="button-group"><a href="#" class="remove-btn"><i class="icon-remove"></i></a></td></tr>');
-                $('input#task').val('');
+                $('input#task-txt').val('');
             }
         });
         return false;

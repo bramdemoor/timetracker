@@ -2,6 +2,9 @@
 
 include('DatabaseLayer.php');
 
+require_once('FirePHP.class.php');
+ob_start();
+
 if(isset($_POST['action']) && !empty($_POST['action'])) {
     $action = $_POST['action'];
     switch($action) {

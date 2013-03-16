@@ -20,6 +20,8 @@ include('includes/TaskController.php');
         <script src="js/jquery-1.9.1.min.js"></script>
         <script src="js/jquery.dateFormat-1.0.js"></script>
         <script src="js/bootstrap.js"></script>
+        <script src="js/jquery-migrate-1.1.1.min.js"></script>
+        <script src="js/bootstrap-typeahead.js"></script>
         <script src="bootstrap-editable-1/bootstrap-editable/js/bootstrap-editable.js"></script>
         <script src="js/main.js"></script>
 
@@ -31,7 +33,7 @@ include('includes/TaskController.php');
                 <form name="entry" action="">
                     <fieldset>
                         <div class="input-append">
-                            <input type="text" name="task" id="task" size="30" value="" placeholder="Task..." />
+                            <input type="text" name="task" id="task-txt" data-provide="typeahead" autocomplete="off" size="30" value="" placeholder="Task..." />
                             <button id="submit_btn" class="btn" type="button"><i class="icon-plus"></i></button>
                         </div>
                     </fieldset>
