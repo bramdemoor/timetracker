@@ -13,23 +13,26 @@ tr.task-entry td {
 
 .tscode-field {
     border-bottom: none !important;
-    width: 200px;
+    width: 245px;
+    vertical-align: middle !important;
 }
 
 .task-field {
     border-bottom: none !important;
-    width: 530px;
+    vertical-align: middle !important;
 }
 
 .datetime-field {
     border-bottom: none !important;
     width: 125px;
+    vertical-align: middle !important;
 }
 
 .button-group {
     border-bottom: none !important;
     width: 65px;
     text-align: center;
+    vertical-align: middle !important;
 }
 
 .remove-btn {
@@ -48,12 +51,19 @@ tr.task-entry td {
     width: 300px !important;
 }
 
+#tscode-txt {
+    width: 250px;
+}
+
 #task-txt {
     border-left: 0 !important;
     -webkit-border-radius: 0 !important;
     -moz-border-radius: 0 !important;
     border-radius: 0 !important;
+    width: 300px;
 }
+
+
 
 
 

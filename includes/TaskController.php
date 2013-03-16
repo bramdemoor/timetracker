@@ -2,9 +2,6 @@
 
 include('DatabaseLayer.php');
 
-require_once('FirePHP.class.php');
-ob_start();
-
 if(isset($_POST['action']) && !empty($_POST['action'])) {
     $action = $_POST['action'];
     switch($action) {
@@ -36,7 +33,16 @@ function updateTaskDescription() {
 }
 
 function getAllEntries() {
-    return DatabaseLayer::getInstance()->getAllEntries();
+    $entries = DatabaseLayer::getInstance()->getAllEntries();
+
+    $returnArray =  array();
+    foreach($entries as &$value) {
+        $date = date('d-m-Y', strtotime($value['Start']));
+        $returnArray[$date][] = $value;
+    }
+    ksort($returnArray);
+
+    return $returnArray;
 }
 
 function removeEntry() {
