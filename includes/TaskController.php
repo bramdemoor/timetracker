@@ -23,8 +23,9 @@ if(isset($_GET['action']) && !empty($_GET['action'])) {
 
 function createNewTask() {
     $task = $_POST['task'];
+    $tscode = $_POST['tsCode'];
     $start = time();
-    DatabaseLayer::getInstance()->insertTask($task, $start);
+    DatabaseLayer::getInstance()->insertTask($tscode, $task, $start);
 }
 
 function updateTaskDescription() {

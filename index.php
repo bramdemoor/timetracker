@@ -33,6 +33,7 @@ include('includes/TaskController.php');
                 <form name="entry" action="">
                     <fieldset>
                         <div class="input-append">
+                            <input type="text" name="task" id="tscode-txt" size="30" value="" placeholder="Timesheetcode..." />
                             <input type="text" name="task" id="task-txt" data-provide="typeahead" autocomplete="off" size="30" value="" placeholder="Task..." />
                             <button id="submit_btn" class="btn" type="button"><i class="icon-plus"></i></button>
                         </div>
@@ -56,6 +57,9 @@ include('includes/TaskController.php');
                 $entries = getAllEntries();
                 foreach($entries as &$value) { ?>
                     <tr class="task-entry">
+                        <td class="tscode-field">
+                            <?php echo $value['TSCode'] ?>
+                        </td>
                         <td class="task-field" data-pk="<?php echo $value['Id'] ?>">
                             <?php echo $value['Task'] ?>
                         </td>

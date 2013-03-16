@@ -8,16 +8,27 @@ tr.task-entry td {
 
 .editable-click {
     border-bottom: none !important;
-    width: 740px;
+    width: 540px;
 }
+
+.tscode-field {
+    border-bottom: none !important;
+    width: 200px;
+}
+
+.task-field {
+    border-bottom: none !important;
+    width: 530px;
+}
+
 .datetime-field {
     border-bottom: none !important;
-    width: 130px;
+    width: 125px;
 }
 
 .button-group {
     border-bottom: none !important;
-    width: 50px;
+    width: 65px;
     text-align: center;
 }
 
@@ -36,4 +47,15 @@ tr.task-entry td {
 .input-inline-text {
     width: 680px;
 }
+
+#task-txt {
+    border-left: 0 !important;
+    -webkit-border-radius: 0 !important;
+    -moz-border-radius: 0 !important;
+    border-radius: 0 !important;
+}
+
+
+
+
 

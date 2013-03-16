@@ -64,15 +64,16 @@ $(function() {
     });
 
     $('#submit_btn').click(function() {
+        var tscode = $('input#tscode-txt').val();
         var task = $('input#task-txt').val();
         var start = new Date().getTime();
-        var dataString = 'action=createNewTask&task='+ task +'&start='+ start;
+        var dataString = 'action=createNewTask&tsCode=' + tscode + '&task='+ task +'&start='+ start;
         $.ajax({
             type: 'POST',
             url: 'includes/TaskController.php',
             data: dataString,
             success: function() {
-                $('#table-entries tr:last').after('<tr><td class="task-field" >'+ task +'</td><td class="datetime-field">'+ $.format.date(start, "yyyy-MM-dd HH:mm") +'</td><td class="button-group"><a href="#" class="remove-btn"><i class="icon-remove"></i></a></td></tr>');
+                $('#table-entries tr:last').after('<tr><td class="tscode-field" >'+ tscode +'</td><td class="task-field" >'+ task +'</td><td class="datetime-field">'+ $.format.date(start, "yyyy-MM-dd HH:mm") +'</td><td class="button-group"><a href="#" class="edit-btn" style="display: none;"><i class="icon-edit"></i></a><a href="#" class="remove-btn" style="display: none;"><i class="icon-remove"></i></a></td></tr>');
                 $('input#task-txt').val('');
             }
         });
