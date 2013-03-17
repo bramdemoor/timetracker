@@ -7,7 +7,7 @@
 
 <div class="container">
     <?php include('Includes/Navigation.php') ?>
-    <h2>New Entry</h2>
+    <h3>New Entry</h3>
 
     <div id="message"></div>
     <div id="entry_form">
@@ -23,12 +23,12 @@
             </fieldset>
         </form>
     </div>
-    <h2>Entries</h2>
+    <h3>Entries</h3>
     <?php
     $entries = $data['entries'];
     foreach ($entries as $key => $value) {
         ?>
-        <h4><?php echo (new DateTime($key))->format('D d F Y');?></h4>
+        <h5><?php echo (new DateTime($key))->format('D d F Y');?></h5>
         <table id="table-entries" class="table table-hover table-condensed">
             <?php foreach ($value as &$task) { ?>
             <tr class="task-entry">

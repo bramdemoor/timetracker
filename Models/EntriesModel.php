@@ -6,8 +6,6 @@ use Library\DataLayer\DatabaseLayer;
 
 class EntriesModel
 {
-    //TODO: is singleton pattern needed ?
-
     public function __construct()
     {
     }
