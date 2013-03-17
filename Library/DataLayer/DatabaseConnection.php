@@ -1,5 +1,9 @@
 <?php
 
+namespace Library\DataLayer;
+
+use Mysqli;
+
 abstract class DatabaseConnection
 {
     protected static $mysql;

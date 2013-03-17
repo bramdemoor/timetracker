@@ -5,7 +5,7 @@ $(function() {
         source: function(typeahead, query) {
             $.ajax({
                 type: 'GET',
-                url: 'includes/TaskController.php',
+                url: 'Library/TaskController.php',
                 data: 'action=getTsCodes',
                 dataType: 'json',
                 success: function(data) {
@@ -23,7 +23,7 @@ $(function() {
             source: function(typeahead, query) {
                 $.ajax({
                     type: 'GET',
-                    url: 'includes/TaskController.php',
+                    url: 'Library/TaskController.php',
                     data: 'action=getEntryNames',
                     dataType: 'json',
                     success: function(data) {
@@ -52,7 +52,7 @@ $(function() {
         var rowElement = $(this).closest('tr');
         $.ajax({
             type: 'POST',
-            url: 'includes/TaskController.php',
+            url: 'Library/TaskController.php',
             data: dataString,
             success: function() {
                 rowElement.remove();
@@ -77,7 +77,7 @@ $(function() {
         },
         ajaxOptions: {
             type: 'POST',
-            url: 'includes/TaskController.php'
+            url: 'Library/TaskController.php'
         }
     });
 
@@ -88,7 +88,7 @@ $(function() {
         var dataString = 'action=createNewTask&tsCode=' + tscode + '&task='+ task +'&start='+ start;
         $.ajax({
             type: 'POST',
-            url: 'includes/TaskController.php',
+            url: 'Library/TaskController.php',
             data: dataString,
             success: function() {
                 $('#table-entries tr:last').after('<tr><td class="tscode-field" >'+ tscode +'</td><td class="task-field" >'+ task +'</td><td class="datetime-field">'+ $.format.date(start, "yyyy-MM-dd HH:mm") +'</td><td class="button-group"><a href="#" class="edit-btn" style="display: none;"><i class="icon-edit"></i></a><a href="#" class="remove-btn" style="display: none;"><i class="icon-remove"></i></a></td></tr>');

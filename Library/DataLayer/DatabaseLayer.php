@@ -1,8 +1,8 @@
 <?php
 
-function __autoload($class_name) {
-    include $class_name . '.php';
-}
+namespace Library\DataLayer;
+
+use Library\DataLayer\DatabaseConnection;
 
 class DatabaseLayer extends DatabaseConnection
 {

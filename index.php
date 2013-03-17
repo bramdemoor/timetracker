@@ -3,7 +3,14 @@
 ini_set('display_errors',1);
 error_reporting(E_ALL);
 
-include('includes/TaskController.php');
+use Library\Loader\SplClassLoader,
+    Library\Controllers\TaskController;
+
+require_once __DIR__ . "/Library/Loader/SplClassLoader.php";
+$autoloader = new SplClassLoader();
+$autoloader->register();
+
+$taskcontroller = new TaskController();
 
 ?>
 
@@ -24,10 +31,17 @@ include('includes/TaskController.php');
         <script src="js/bootstrap-typeahead.js"></script>
         <script src="bootstrap-editable-1/bootstrap-editable/js/bootstrap-editable.js"></script>
         <script src="js/main.js"></script>
-
-
         <div class="container">
-            <h1>Timetracker</h1>
+            <div class="navbar">
+                <div class="navbar-inner">
+                    <a class="brand" href="#">Timetracker</a>
+                    <ul class="nav">
+                        <li class="active"><a href="#">Entries</a></li>
+                        <li><a href="#">Reporting</a></li>
+                        <li><a href="#">Export</a></li>
+                    </ul>
+                </div>
+            </div>
             <h2>New Entry</h2>
             <div id="message"></div>
             <div id="entry_form">
@@ -43,7 +57,7 @@ include('includes/TaskController.php');
             </div>
             <h2>Entries</h2>
             <?php
-                $entries = getAllEntries();
+                $entries = $taskcontroller->getAllEntries();
                 foreach($entries as $key => $value) { ?>
                     <h4><?php echo (new DateTime($key))->format('D d F Y');?></h4>
                     <table id="table-entries" class="table table-hover table-condensed">
