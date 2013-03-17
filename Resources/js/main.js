@@ -5,12 +5,9 @@ $(function() {
         source: function(typeahead, query) {
             $.ajax({
                 type: 'GET',
-                url: 'Library/TaskController.php',
-                data: 'action=getTsCodes',
+                url: 'index.php?entries&getTsCodes',
                 dataType: 'json',
                 success: function(data) {
-                    console.log("tscode called");
-                    console.log(data);
                     typeahead.process(data);
                 }
             })
@@ -23,11 +20,9 @@ $(function() {
             source: function(typeahead, query) {
                 $.ajax({
                     type: 'GET',
-                    url: 'Library/TaskController.php',
-                    data: 'action=getEntryNames',
+                    url: 'index.php?entries&getEntryNames',
                     dataType: 'json',
                     success: function(data) {
-                        console.log(data);
                         typeahead.process(data);
                     }
                 })
@@ -48,12 +43,10 @@ $(function() {
 
     $('.remove-btn').click(function() {
         var $id = $(this).closest('tr').children('.task-field').attr('data-pk');
-        var dataString = 'action=removeEntry&pk=' + $id;
         var rowElement = $(this).closest('tr');
         $.ajax({
             type: 'POST',
-            url: 'Library/TaskController.php',
-            data: dataString,
+            url: 'index.php?entries&removeEntry&pk=' + $id,
             success: function() {
                 rowElement.remove();
             }
@@ -66,7 +59,7 @@ $(function() {
     $('.task-field').editable({
         type: 'text',
         id: 'Task',
-        url: '/TaskController.php',
+        url: 'index.php',
         toggle: 'manual',
         inputclass:'input-inline-text',
         showbuttons: false,
@@ -77,21 +70,23 @@ $(function() {
         },
         ajaxOptions: {
             type: 'POST',
-            url: 'Library/TaskController.php'
-        }
+            url: 'index.php?entries&updateTaskDescription'
+            }
     });
+
+    function idCurrentRow(element) {
+        return 'index.php?entries&updateTaskDescription&pk=50';
+    }
 
     $('#submit_btn').click(function() {
         var tscode = $('input#tscode-txt').val();
-        var task = $('input#task-txt').val();
+        var descr = $('input#task-txt').val();
         var start = new Date().getTime();
-        var dataString = 'action=createNewTask&tsCode=' + tscode + '&task='+ task +'&start='+ start;
         $.ajax({
             type: 'POST',
-            url: 'Library/TaskController.php',
-            data: dataString,
+            url: 'index.php?entries&createNewEntry&tsCode=' + tscode + '&description='+ descr +'&start='+ start,
             success: function() {
-                $('#table-entries tr:last').after('<tr><td class="tscode-field" >'+ tscode +'</td><td class="task-field" >'+ task +'</td><td class="datetime-field">'+ $.format.date(start, "yyyy-MM-dd HH:mm") +'</td><td class="button-group"><a href="#" class="edit-btn" style="display: none;"><i class="icon-edit"></i></a><a href="#" class="remove-btn" style="display: none;"><i class="icon-remove"></i></a></td></tr>');
+                $('#table-entries tr:last').after('<tr><td class="tscode-field" >'+ tscode +'</td><td class="task-field" >'+ descr +'</td><td class="datetime-field">'+ $.format.date(start, "yyyy-MM-dd HH:mm") +'</td><td class="button-group"><a href="#" class="edit-btn" style="display: none;"><i class="icon-edit"></i></a><a href="#" class="remove-btn" style="display: none;"><i class="icon-remove"></i></a></td></tr>');
                 $('input#task-txt').val('');
                 $('input#tscode-txt').val('');
             }
