@@ -2,7 +2,8 @@
 
 namespace Models;
 
-use Library\DataLayer\DatabaseLayer;
+use Library\DataLayer\DatabaseLayer,
+    DateTime;
 
 class ReportsModel
 {
@@ -12,9 +13,17 @@ class ReportsModel
     public function getEntriesGroupedByTask() {
         $entries = DatabaseLayer::getInstance()->getAllEntries();
 
-        //TODO: calculate time spent per task
+        for ($i=0; $i<=count($entries); $i++)
+        {
+            if(isset($entries[$i + 1])) {
+                $current = new DateTime($entries[$i]['Start']);
+                $next = new DateTime($entries[$i + 1]['Start']);
+                $diff = $current->diff($next);
+                $entries[$i]['TimeSpent'] = $diff;
+            }
 
-        //group by date
+        }
+
         $groupedByDate =  array();
         foreach($entries as &$value) {
             $date = date('d-m-Y', strtotime($value['Start']));
@@ -22,15 +31,16 @@ class ReportsModel
         }
         ksort($groupedByDate);
 
-        //group by task, summarize description, sum calculated time
         $groupedByTask = array();
         foreach($groupedByDate as $k => $v) {
-            $descrSummary = array();
+            $summarised = array();
             foreach($v as &$entry) {
-                $descrSummary[$entry['TSCode']][] = $entry['Task'];
+                if(isset($entry['TimeSpent'])) $summarised[$entry['TSCode']]['TimeSpent'][] = $entry['TimeSpent'];
+                if(isset($entry['Task'])) $summarised[$entry['TSCode']]['Summary'][] = $entry['Task'];
             }
-            $groupedByTask[$k] = $descrSummary;
+            $groupedByTask[$k] = $summarised;
         }
+
         return $groupedByTask;
     }
 }

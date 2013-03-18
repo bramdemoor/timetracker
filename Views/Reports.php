@@ -26,10 +26,19 @@
                                 <? if(count($taskValue) == 1) {
                                 echo $taskValue[0];
                             } else {
-                                foreach($taskValue as $descr) {
+                                foreach($taskValue['Summary'] as $descr) {
                                     echo $descr. ', ';
                                 }
                             } ?>
+                            </small>
+                            <small>
+                                <?
+                                $e = new DateTime('00:00');
+                                foreach($taskValue['TimeSpent'] as $timeSpent) {
+                                    $e->add($timeSpent);
+                                }
+                                echo $e->format("H:i");
+                                ?>
                             </small>
                         </blockquote>
                     </td>
