@@ -4,7 +4,7 @@ namespace Library;
 
 class Router
 {
-    const DEFAULT_CONTROLLER = "EntriesController";
+    const DEFAULT_CONTROLLER = "Controllers\\EntriesController";
     const DEFAULT_ACTION     = "index";
 
     protected $controller    = self::DEFAULT_CONTROLLER;
@@ -18,6 +18,7 @@ class Router
 
     protected function parseUri() {
         $request = $_SERVER['QUERY_STRING'];
+
         $parsed = explode('&' , $request);
 
         $controller = array_shift($parsed);
@@ -34,10 +35,11 @@ class Router
             $params[$key] = $val;
         }
 
-        if (isset($controller)) {
+        if ($controller !== '') {
             $this->setController($controller);
         }
         if (isset($action)) {
+
             $this->setAction($action);
         }
         if (isset($params)) {
