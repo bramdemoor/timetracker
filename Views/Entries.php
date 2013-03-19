@@ -24,32 +24,32 @@
         </form>
     </div>
     <h3>Entries</h3>
+    <div id="table-entries">
     <?php
     $entries = $data['entries'];
-    foreach ($entries as $key => $value) {
-        ?>
-        <h5><?php echo (new DateTime($key))->format('D d F Y');?></h5>
-        <table class="table table-hover table-condensed">
-            <?php foreach ($value as &$task) { ?>
-            <tr class="task-entry <?php if($task['TSCode'] == 'Break') echo 'warning'; if($task['TSCode'] == 'Stop') echo 'error';  ?>">
-                <td class="tscode-field">
-                    <?php echo $task['TSCode'] ?>
-                </td>
-                <td class="task-field" data-pk="<?php echo $task['Id'] ?>">
-                    <?php echo $task['Task'] ?>
-                </td>
-                <td class="datetime-field">
-                    <small>Start:</small> <?php echo (new DateTime($task['Start']))->format('H:i'); ?>
-                </td>
-                <td class="button-group">
-                    <a href="#" class="edit-btn"><i class="icon-edit"></i></a>
-                    <a href="#" class="remove-btn"><i class="icon-remove"></i></a>
-                </td>
-            </tr>
-
-            <?php } ?>
-        </table>
+        foreach ($entries as $key => $value) {?>
+            <h5><?php echo (new DateTime($key))->format('D d F Y');?></h5>
+            <table class="table table-hover table-condensed">
+                <?php foreach ($value as &$task) { ?>
+                <tr class="task-entry <?php if($task['TSCode'] == 'Break') echo 'warning'; if($task['TSCode'] == 'Stop') echo 'error';  ?>">
+                    <td class="tscode-field">
+                        <?php echo $task['TSCode'] ?>
+                    </td>
+                    <td class="task-field" data-pk="<?php echo $task['Id'] ?>">
+                        <?php echo $task['Task'] ?>
+                    </td>
+                    <td class="datetime-field">
+                        <small>Start:</small> <?php echo (new DateTime($task['Start']))->format('H:i'); ?>
+                    </td>
+                    <td class="button-group">
+                        <a href="#" class="edit-btn"><i class="icon-edit"></i></a>
+                        <a href="#" class="remove-btn"><i class="icon-remove"></i></a>
+                    </td>
+                </tr>
+                <?php } ?>
+            </table>
         <?php }?>
+    </div>
 </div>
 </body>
 </html>

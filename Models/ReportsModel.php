@@ -5,11 +5,6 @@ namespace Models;
 use Library\DataLayer\DatabaseLayer,
     DateTime;
 
-use FirePHP;
-require_once('FirePHP.class.php');
-ob_start();
-
-
 class ReportsModel
 {
     public function __construct() {
@@ -18,16 +13,12 @@ class ReportsModel
     public function getEntriesGroupedByTask() {
         $entries = DatabaseLayer::getInstance()->getAllEntries();
 
-        $fp = FirePHP::getInstance(true);
-
         //calculate TimeSpent per Entry
         for ($i=0; $i<=count($entries); $i++)
         {
             if($entries[$i]['TSCode'] == 'Stop') {
                 //ditch unneeded Stop entries
                 unset($entries[$i]);
-
-
             } else {
 
                 if(isset($entries[$i + 1])) {
@@ -37,7 +28,6 @@ class ReportsModel
                     $entries[$i]['TimeSpent'] = $diff;
                 }
             }
-
         }
         array_reverse($entries, true);
 
@@ -67,8 +57,6 @@ class ReportsModel
             $groupedByTask[$k]['TSCodes'] = $summarised;
             $groupedByTask[$k]['TotalTimeSpent'] = $totalTimeSpent;
         }
-
-        $fp->log($groupedByTask);
 
         return $groupedByTask;
     }
