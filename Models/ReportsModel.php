@@ -16,6 +16,7 @@ class ReportsModel
 
     public function getEntriesGroupedByTask() {
         $entries = DatabaseLayer::getInstance()->getAllEntries();
+        $fp = FirePHP::getInstance(true);
 
         for ($i=0; $i<=count($entries); $i++)
         {
@@ -40,11 +41,20 @@ class ReportsModel
         $groupedByTask = array();
         foreach($groupedByDate as $k => $v) {
             $summarised = array();
+            $totalTimeSpent = new DateTime('00:00');
             foreach($v as &$entry) {
-                if(isset($entry['TimeSpent'])) $summarised[$entry['TSCode']]['TimeSpent'][] = $entry['TimeSpent'];
+                if(isset($entry['TimeSpent']) && isset($summarised[$entry['TSCode']])) {
+                    $summarised[$entry['TSCode']]['TimeSpent']->add($entry['TimeSpent']);
+                    $totalTimeSpent->add($entry['TimeSpent']);
+                } elseif(isset($entry['TimeSpent'])) {
+                    $summarised[$entry['TSCode']]['TimeSpent'] = (new DateTime('00:00'))->add($entry['TimeSpent']);
+                    $totalTimeSpent->add($entry['TimeSpent']);
+                }
                 if(isset($entry['Task'])) $summarised[$entry['TSCode']]['Summary'][] = $entry['Task'];
             }
-            $groupedByTask[$k] = $summarised;
+            $groupedByTask[$k]['TSCodes'] = $summarised;
+            $groupedByTask[$k]['TotalTimeSpent'] = $totalTimeSpent;
+            $fp->log($groupedByTask);
         }
 
         return $groupedByTask;

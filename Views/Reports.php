@@ -13,9 +13,9 @@
         $entries = $data['reportData'];
         foreach ($entries as $key => $value) {
             ?>
-            <h5><?php echo (new DateTime($key))->format('D d F Y');?></h5>
+            <div class="report-group-header"><span class="date-label"><?php echo (new DateTime($key))->format('D d F Y'); ?></span><small> - Total time spent: <?php echo $value['TotalTimeSpent']->format("H:i"); ?></small></div>
             <table id="table-entries" class="table table-striped table-condensed">
-                <?php foreach ($value as $taskKey => $taskValue) { ?>
+                <?php foreach ($value['TSCodes'] as $taskKey => $taskValue) { ?>
                 <tr class="task-entry">
                     <td class="tscode-field">
                         <blockquote>
@@ -32,13 +32,7 @@
                             } ?>
                             </small>
                             <small>
-                                <?
-                                $e = new DateTime('00:00');
-                                foreach($taskValue['TimeSpent'] as $timeSpent) {
-                                    $e->add($timeSpent);
-                                }
-                                echo $e->format("H:i");
-                                ?>
+                                <?  echo $taskValue['TimeSpent']->format("H:i"); ?>
                             </small>
                         </blockquote>
                     </td>

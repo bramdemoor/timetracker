@@ -67,6 +67,16 @@ tr.task-entry td {
     width: 300px;
 }
 
+.report-group-header .date-label {
+    font-size: 14px;
+    color: inherit;
+    font-family: inherit;
+    font-weight: bold;
+    line-height: 20px;
+    margin: 10px 0;
+    text-rendering: optimizelegibility;
+}
+
 
 
 
