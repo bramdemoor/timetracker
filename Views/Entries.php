@@ -31,7 +31,7 @@
         <h5><?php echo (new DateTime($key))->format('D d F Y');?></h5>
         <table class="table table-hover table-condensed">
             <?php foreach ($value as &$task) { ?>
-            <tr class="task-entry">
+            <tr class="task-entry <?php if($task['TSCode'] == 'Break') echo 'warning'; if($task['TSCode'] == 'Stop') echo 'error';  ?>">
                 <td class="tscode-field">
                     <?php echo $task['TSCode'] ?>
                 </td>
