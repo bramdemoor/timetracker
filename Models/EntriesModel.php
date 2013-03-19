@@ -12,13 +12,14 @@ class EntriesModel
 
     public function getAllEntries() {
         $entries = DatabaseLayer::getInstance()->getAllEntries();
+        rsort($entries);
 
         $returnArray =  array();
         foreach($entries as &$value) {
             $date = date('d-m-Y', strtotime($value['Start']));
             $returnArray[$date][] = $value;
         }
-        ksort($returnArray);
+        krsort($returnArray);
 
         return $returnArray;
     }

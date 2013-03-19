@@ -5,6 +5,10 @@ namespace Models;
 use Library\DataLayer\DatabaseLayer,
     DateTime;
 
+use FirePHP;
+require_once('FirePHP.class.php');
+ob_start();
+
 class ReportsModel
 {
     public function __construct() {
@@ -24,12 +28,14 @@ class ReportsModel
 
         }
 
+        array_reverse($entries, true);
+
         $groupedByDate =  array();
         foreach($entries as &$value) {
             $date = date('d-m-Y', strtotime($value['Start']));
             $groupedByDate[$date][] = $value;
         }
-        ksort($groupedByDate);
+        krsort($groupedByDate);
 
         $groupedByTask = array();
         foreach($groupedByDate as $k => $v) {
