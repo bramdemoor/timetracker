@@ -86,7 +86,7 @@ $(function() {
             type: 'POST',
             url: 'index.php?entries&createNewEntry&tsCode=' + tscode + '&description='+ descr +'&start='+ start,
             success: function() {
-                $('#table-entries table:last tr:last').after('<tr class="task-entry"><td class="tscode-field" >'+ tscode +'</td><td class="task-field" >'+ descr +'</td><td class="datetime-field"><small>Start:</small> '+ $.format.date(start, "HH:mm") +'</td><td class="button-group"><a href="#" class="edit-btn" style="display: none;"><i class="icon-edit"></i></a><a href="#" class="remove-btn" style="display: none;"><i class="icon-remove"></i></a></td></tr>');
+                $('#table-entries table:first tr:first').before('<tr class="task-entry"><td class="tscode-field" >'+ tscode +'</td><td class="task-field" >'+ descr +'</td><td class="datetime-field"><small>Start:</small> '+ $.format.date(start, "HH:mm") +'</td><td class="button-group"><a href="#" class="edit-btn" style="display: none;"><i class="icon-edit"></i></a><a href="#" class="remove-btn" style="display: none;"><i class="icon-remove"></i></a></td></tr>');
                 $('input#task-txt').val('');
                 $('input#tscode-txt').val('');
             }
