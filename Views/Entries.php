@@ -28,8 +28,8 @@
     <?php
     $entries = $data['entries'];
         foreach ($entries as $key => $value) {?>
-            <h5><?php echo (new DateTime($key))->format('D d F Y');?></h5>
-            <table class="table table-hover table-condensed">
+            <h5><?php echo (new DateTime($key))->format('l d F Y');?></h5>
+            <table id="<?php echo $key;?>" class="table table-hover table-condensed" >
                 <?php foreach ($value as &$task) { ?>
                 <tr class="task-entry <?php if($task['TSCode'] == 'Break') echo 'warning'; if($task['TSCode'] == 'Stop') echo 'error';  ?>">
                     <td class="tscode-field">

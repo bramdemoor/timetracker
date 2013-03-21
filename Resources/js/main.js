@@ -86,7 +86,19 @@ $(function() {
             type: 'POST',
             url: 'index.php?entries&createNewEntry&tsCode=' + tscode + '&description='+ descr +'&start='+ start,
             success: function() {
-                $('#table-entries table:first tr:first').before('<tr class="task-entry"><td class="tscode-field" >'+ tscode +'</td><td class="task-field" >'+ descr +'</td><td class="datetime-field"><small>Start:</small> '+ $.format.date(start, "HH:mm") +'</td><td class="button-group"><a href="#" class="edit-btn" style="display: none;"><i class="icon-edit"></i></a><a href="#" class="remove-btn" style="display: none;"><i class="icon-remove"></i></a></td></tr>');
+                var idDate = $.format.date(start, 'dd-MM-yyyy');
+                //check if current day is already present
+                if($('#' + idDate).length == 0) {
+                    $('#table-entries h5:first').before(
+                        '<h5>'+ $.format.date(start, 'ddd dd MMMM yyyy') +'</h5>' +
+                        '<table id="'+ idDate +'" class="table table-hover table-condensed"><tr></tr></table>');
+                }
+                $('#table-entries table:first tr:first').before(
+                    '<tr class="task-entry"><td class="tscode-field" >'+ tscode +
+                        '</td><td class="task-field" >'+ descr +
+                        '</td><td class="datetime-field"><small>Start:</small> '+ $.format.date(start, "HH:mm") +
+                        '</td><td class="button-group"><a href="#" class="edit-btn" style="display: none;"><i class="icon-edit">' +
+                        '</i></a><a href="#" class="remove-btn" style="display: none;"><i class="icon-remove"></i></a></td></tr>');
                 $('input#task-txt').val('');
                 $('input#tscode-txt').val('');
             }
