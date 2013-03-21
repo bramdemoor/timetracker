@@ -16,16 +16,11 @@ class ReportsModel
         //calculate TimeSpent per Entry
         for ($i=0; $i<=count($entries); $i++)
         {
-            if($entries[$i]['TSCode'] == 'Stop') {
-                //ditch unneeded Stop entries
-                unset($entries[$i]);
-            } else {
-                if(isset($entries[$i + 1])) {
-                    $current = new DateTime($entries[$i]['Start']);
-                    $next = new DateTime($entries[$i + 1]['Start']);
-                    $diff = $current->diff($next);
-                    $entries[$i]['TimeSpent'] = $diff;
-                }
+            if(isset($entries[$i + 1])) {
+                $current = new DateTime($entries[$i]['Start']);
+                $next = new DateTime($entries[$i + 1]['Start']);
+                $diff = $current->diff($next);
+                $entries[$i]['TimeSpent'] = $diff;
             }
         }
         array_reverse($entries, true);
@@ -33,8 +28,14 @@ class ReportsModel
         //group Entries by Date
         $groupedByDate =  array();
         foreach($entries as &$value) {
-            $date = date('d-m-Y', strtotime($value['Start']));
-            $groupedByDate[$date][] = $value;
+            if($value['TSCode'] == 'Stop')  {
+                //ditch unneeded Stop entries
+                unset($entries[$i]);
+            }
+            else {
+                $date = date('d-m-Y', strtotime($value['Start']));
+                $groupedByDate[$date][] = $value;
+            }
         }
         krsort($groupedByDate);
 
