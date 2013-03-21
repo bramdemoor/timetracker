@@ -14,11 +14,18 @@ class ReportsModel
         $entries = DatabaseLayer::getInstance()->getAllEntries();
 
         //calculate TimeSpent per Entry
-        for ($i=0; $i<=count($entries); $i++)
+        $countEntries = count($entries);
+        for ($i=0; $i<$countEntries; $i++)
         {
             if(isset($entries[$i + 1])) {
                 $current = new DateTime($entries[$i]['Start']);
                 $next = new DateTime($entries[$i + 1]['Start']);
+                $diff = $current->diff($next);
+                $entries[$i]['TimeSpent'] = $diff;
+            } else {
+                //calculate time for last task until now
+                $current = new DateTime($entries[$i]['Start']);
+                $next = new DateTime();
                 $diff = $current->diff($next);
                 $entries[$i]['TimeSpent'] = $diff;
             }
