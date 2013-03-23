@@ -1,1 +1,120 @@
-<h1>Hello world!</h1>
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Timetracker</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link href="Resources/css/bootstrap.css" rel="stylesheet" media="screen">
+	<link href="Resources/css/main.css" rel="stylesheet" media="screen">
+	<link href="Resources/bootstrap-editable-1/bootstrap-editable/css/bootstrap-editable.css" rel="stylesheet">
+	<script src="Resources/js/jquery-1.9.1.min.js"></script>
+	<script src="Resources/js/jquery.dateFormat-1.0.js"></script>
+	<script src="Resources/js/bootstrap.js"></script>
+	<script src="Resources/js/jquery-migrate-1.1.1.min.js"></script>
+	<script src="Resources/js/bootstrap-typeahead.js"></script>
+	<script src="Resources/bootstrap-editable-1/bootstrap-editable/js/bootstrap-editable.js"></script>
+	<script src="Resources/js/jquery.fileDownload.js"></script>
+	<script src="Resources/js/main.js"></script>
+</head>
+<body>
+
+<div class="container">
+	<div class="navbar">
+		<div class="navbar-inner">
+			<a class="brand" href="/timetracker/index.php?entries">Timetracker</a>
+			<ul class="nav">
+				<?php $currentPage = basename($_SERVER['REQUEST_URI']); ?>
+				<li <?php if($currentPage == "index.php?entries" || $currentPage == "timetracker" ) echo ' class="active"'; ?>><a href="/timetracker/index.php?entries">Entries</a></li>
+				<li <?php if($currentPage == "index.php?reports") echo ' class="active"'; ?>><a href="/timetracker/index.php?reports">Reporting</a></li>
+				<li <?php if($currentPage == "index.php?export") echo ' class="active"'; ?>><a href="/timetracker/index.php?export">Export</a></li>
+			</ul>
+		</div>
+	</div>
+    <h3>New Entry</h3>
+
+    <div id="message"></div>
+    <div id="entry_form">
+        <form name="entry" action="">
+            <fieldset>
+                <div class="input-append">
+                    <input type="text" name="task" id="tscode-txt" data-provide="typeahead" autocomplete="off" value=""
+                           placeholder="Timesheetcode..."/>
+                    <input type="text" name="task" id="task-txt" data-provide="typeahead" autocomplete="off" value=""
+                           placeholder="Description..."/>
+                    <button id="submit_btn" class="btn" type="button"><i class="icon-plus"></i></button>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+    <h3>Entries</h3>
+    <div id="table-entries">
+    <?php
+    $entries = $data['entries'];
+        foreach ($entries as $key => $value) {?>
+            <h5><?php echo (new DateTime($key))->format('l d F Y');?></h5>
+            <table id="<?php echo $key;?>" class="table table-hover table-condensed" >
+                <?php foreach ($value as &$task) { ?>
+                <tr class="task-entry <?php if($task['TSCode'] == 'Break') echo 'warning'; if($task['TSCode'] == 'Stop') echo 'error';  ?>">
+                    <td class="tscode-field">
+                        <?php echo $task['TSCode'] ?>
+                    </td>
+                    <td class="task-field" data-pk="<?php echo $task['Id'] ?>">
+                        <?php echo $task['Task'] ?>
+                    </td>
+                    <td class="datetime-field">
+                        <small>Start:</small> <?php echo (new DateTime($task['Start']))->format('H:i'); ?>
+                    </td>
+                    <td class="button-group">
+                        <a href="#" class="edit-btn"><i class="icon-edit"></i></a>
+                        <a href="#" class="remove-btn"><i class="icon-remove"></i></a>
+                    </td>
+                </tr>
+                <?php } ?>
+            </table>
+        <?php }?>
+    </div>
+	
+		<!-- TODO BDM: Hide in template! -->
+	
+        <h3>Reports</h3>
+        <div id="message"></div>
+        <h4>Totals by task</h4>
+        <?php
+        $entries = $data['reportData'];
+        foreach ($entries as $key => $value) {
+            ?>
+            <div class="report-group-header"><span class="date-label">
+                <?php echo (new DateTime($key))->format('D d F Y'); ?></span>
+                <small> - Total time spent: <?php echo $value['TotalTimeSpent']->format("H:i"); ?></small>
+                <small> - Total time spent, excl breaks: <?php echo $value['TotalTimeSpentExclBreaks']->format("H:i"); ?></small>
+            </div>
+            <table id="table-entries" class="table table-striped table-condensed">
+                <?php foreach ($value['TSCodes'] as $taskKey => $taskValue) { ?>
+                <tr class="task-entry">
+                    <td class="tscode-field">
+                        <blockquote>
+                            <p>
+                                <?php echo $taskKey ?>
+                            </p>
+                            <small>
+                                <? if(count($taskValue) == 1) {
+                                echo $taskValue[0];
+                            } else {
+                                foreach($taskValue['Summary'] as $descr) {
+                                    echo $descr. ', ';
+                                }
+                            } ?>
+                            </small>
+                            <small>
+                                <?  echo $taskValue['TimeSpent']->format("H:i"); ?>
+                            </small>
+                        </blockquote>
+                    </td>
+                </tr>
+                <?php } ?>
+            </table>
+            <?php }?>	
+</div>
+</body>
+</html>
+
+
