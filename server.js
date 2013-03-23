@@ -5,6 +5,10 @@ var app = express();
 app.use(express.logger('dev'));
 app.use(express.static(__dirname + '/public'));
 
+app.get('/entry', function(req, res){
+  res.json([{Id:1,TSCode:'ABC123',Task:'My first entry',Start:new Date()}]);
+});
+
 app.listen(8080);
 
 /*
@@ -28,5 +32,5 @@ app.listen(8080);
 	
 	getTsCodes => getDistinctTsCodes
 	getTsCodes => getTsCodes (json!)
-	"SELECT DISTINCT TSCode FROM entries"
+	"SELECT DISTINCT TSCode FROM entries" 
 */
