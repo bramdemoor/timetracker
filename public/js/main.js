@@ -3,6 +3,9 @@ $(function() {
 	var viewModel = function() {
 		var self = this;
 		self.entries = ko.observableArray(['test','test2']);
+		self.today = ko.computed(function() {
+			return moment().format('dddd DD/MM/YYYY');
+		});
 	}
 
     $('#tscode-txt').typeahead( {
