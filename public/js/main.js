@@ -17,6 +17,14 @@ $(function() {
 		self.isHovered = ko.computed(function() {
 			return true;
 		});
+		self.edit = function() {
+			console.log('toggle row edit');
+			// toggle row edit
+		}
+		self.remove = function() {
+			console.log('remove row');
+			// post delete
+		}
 	}
 
 	var viewModel = function() {
@@ -31,6 +39,14 @@ $(function() {
 				return new entryModel(item.Id, item.TSCode, item.Task, item.Start);
 			}));
 		});
+		
+		self.addEntry = function() {
+			console.log('add entry!');
+			/*var tscode = $('input#tscode-txt').val();
+			var descr = $('input#task-txt').val();
+			var start = new Date().getTime();*/
+			// DO POST
+		}
 	}
 
     $('#tscode-txt').typeahead( {
@@ -63,57 +79,5 @@ $(function() {
         property: 'Task'
     });
 
-    $(".task-entry").hover(
-        function() { $(this).children(".button-group").children(".remove-btn, .edit-btn").show(); },
-        function() { $(this).children(".button-group").children(".remove-btn, .edit-btn").hide(); }
-    );
-
-    $('.edit-btn').click(function(e) {
-        e.stopPropagation();
-        var currentTablerow = $(this).closest('tr');
-        /*currentTablerow.children(".task-field").editable('toggle');*/
-    });
-
-    $('.remove-btn').click(function() {               
-        $.ajax({
-            type: 'POST',
-            url: '#',
-            success: function() {                
-            }
-        });
-        return false;
-    });
-
-   /* $('.task-field').editable({
-        type: 'text',
-        id: 'Task',
-        url: '#',
-        toggle: 'manual',
-        inputclass:'input-inline-text',
-        showbuttons: false,
-        title: 'Enter new value...',
-        params: function(params) { return params; },
-        ajaxOptions: {
-            type: 'POST',
-            url: '#'
-            }
-    });*/
-
-    function idCurrentRow(element) {
-        return '#';
-    }
-
-    $('#submit_btn').click(function() {
-        var tscode = $('input#tscode-txt').val();
-        var descr = $('input#task-txt').val();
-        var start = new Date().getTime();
-        $.ajax({
-            type: 'POST',
-            url: '#',
-            success: function() { }
-        });
-        return false;
-    });  
-	
 	ko.applyBindings(new viewModel());
 });

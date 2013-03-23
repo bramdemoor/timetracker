@@ -27,7 +27,7 @@
 					<div class="input-append">
 						<input type="text" name="task" id="tscode-txt" data-provide="typeahead" autocomplete="off" value="" placeholder="Timesheetcode..."/>
 						<input type="text" name="task" id="task-txt" data-provide="typeahead" autocomplete="off" value="" placeholder="Description..."/>
-						<button id="submit_btn" class="btn" type="button"><i class="icon-plus"></i></button>
+						<button id="submit_btn" class="btn" type="button" data-bind="click: addEntry"><i class="icon-plus"></i></button>
 					</div>
 				</fieldset>
 			</form>
@@ -38,11 +38,14 @@
 			<table class="table table-hover table-condensed" data-bind="foreach: entries">
 				<tr class="task-entry" data-bind="css: rowClass">					
 					<td class="tscode-field" data-bind="text: tsCode"></td>
-					<td class="task-field" data-bind="text: task"></td>
+					<td class="task-field">
+						<span data-bind="text: task"></span>
+						<input type="text" class="input-inline-text" data-bind="value: task" title="Enter new value..." />
+					</td>
 					<td class="datetime-field"><small>Start:</small> <span data-bind="text: startFormatted"></span></td>
 					<td class="button-group">
-						<a href="#" class="edit-btn" data-bind="visible: isHovered"><i class="icon-edit"></i></a>
-						<a href="#" class="remove-btn" data-bind="visible: isHovered"><i class="icon-remove"></i></a>
+						<a href="#" class="edit-btn" data-bind="visible: isHovered, click: edit"><i class="icon-edit"></i></a>
+						<a href="#" class="remove-btn" data-bind="visible: isHovered, click: remove"><i class="icon-remove"></i></a>
 					</td>
 				</tr>
 			</table>
