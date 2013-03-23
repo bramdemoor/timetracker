@@ -50,34 +50,12 @@ $(function() {
 	}
 
     $('#tscode-txt').typeahead( {
-        minLength: 1,
-        source: function(typeahead, query) {
-            $.ajax({
-                type: 'GET',
-                url: '/tsccodes',
-                dataType: 'json',
-                success: function(data) {
-                    typeahead.process(data);
-                }
-            })
-        },
-        property: 'TSCode'
+        source: function(query, process) { $.getJSON('/tsccodes', function(data) { process(data) }) }
     });
-
+	
     $('#task-txt').typeahead( {
-        minLength: 1,
-            source: function(typeahead, query) {
-                $.ajax({
-                    type: 'GET',
-                    url: '/entrynames',
-                    dataType: 'json',
-                    success: function(data) {
-                        typeahead.process(data);
-                    }
-                })
-        },
-        property: 'Task'
-    });
+        source: function(query, process) { $.getJSON('/entrynames', function(data) { process(data) }) }
+    });	
 
 	ko.applyBindings(new viewModel());
 });
