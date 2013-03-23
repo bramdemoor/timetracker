@@ -1,10 +1,24 @@
 $(function() {
 
+	var entryModel = function(id, tsCode, task, start) {
+		var self = this;
+		self.id = ko.observable(id);
+		self.tsCode = ko.observable(tsCode);
+		self.task = ko.observable(task);
+		self.start = ko.observable(start);
+	}
+
 	var viewModel = function() {
 		var self = this;
-		self.entries = ko.observableArray(['test','test2']);
+		self.entries = ko.observableArray([]);
 		self.today = ko.computed(function() {
 			return moment().format('dddd DD/MM/YYYY');
+		});
+		
+		$.getJSON('/entries', function(data) {
+			self.entries(ko.utils.arrayMap(data, function(item) {
+				return new entryModel(item.Id, item.TSCode, item.Task, item.Start);
+			}));
 		});
 	}
 
