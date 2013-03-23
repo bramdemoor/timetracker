@@ -5,7 +5,7 @@ $(function() {
 		self.id = ko.observable(id);
 		self.tsCode = ko.observable(tsCode);
 		self.task = ko.observable(task);
-		self.start = ko.observable(start);		
+		self.start = ko.observable(start);
 		self.startFormatted = ko.computed(function() {
 			return moment(self.start()).format('h:mm');
 		});
@@ -68,7 +68,7 @@ $(function() {
     $('.edit-btn').click(function(e) {
         e.stopPropagation();
         var currentTablerow = $(this).closest('tr');
-        currentTablerow.children(".task-field").editable('toggle');
+        /*currentTablerow.children(".task-field").editable('toggle');*/
     });
 
     $('.remove-btn').click(function() {               
@@ -81,9 +81,7 @@ $(function() {
         return false;
     });
 
-    $.fn.editable.defaults.mode = 'inline';
-
-    $('.task-field').editable({
+   /* $('.task-field').editable({
         type: 'text',
         id: 'Task',
         url: '#',
@@ -96,7 +94,7 @@ $(function() {
             type: 'POST',
             url: '#'
             }
-    });
+    });*/
 
     function idCurrentRow(element) {
         return '#';
