@@ -17,9 +17,9 @@ $(function() {
 		self.isHovered = ko.computed(function() {
 			return true;
 		});
+		self.inEditMode = ko.observable(false);
 		self.edit = function() {
-			console.log('toggle row edit');
-			// toggle row edit
+			self.inEditMode(true);
 		}
 		self.remove = function() {
 			console.log('remove row');
@@ -29,6 +29,8 @@ $(function() {
 
 	var viewModel = function() {
 		var self = this;
+		self.tsCode = ko.observable('');
+		self.task = ko.observable('');
 		self.entries = ko.observableArray([]);
 		self.today = ko.computed(function() {
 			return moment().format('dddd DD/MM/YYYY');
@@ -42,9 +44,7 @@ $(function() {
 		
 		self.addEntry = function() {
 			console.log('add entry!');
-			/*var tscode = $('input#tscode-txt').val();
-			var descr = $('input#task-txt').val();
-			var start = new Date().getTime();*/
+			// new Date();
 			// DO POST
 		}
 	}

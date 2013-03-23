@@ -25,9 +25,9 @@
 			<form name="entry" action="">
 				<fieldset>
 					<div class="input-append">
-						<input type="text" name="task" id="tscode-txt" data-provide="typeahead" autocomplete="off" value="" placeholder="Timesheetcode..."/>
-						<input type="text" name="task" id="task-txt" data-provide="typeahead" autocomplete="off" value="" placeholder="Description..."/>
-						<button id="submit_btn" class="btn" type="button" data-bind="click: addEntry"><i class="icon-plus"></i></button>
+						<input type="text" id="tscode-txt" data-bind="value: tsCode" data-provide="typeahead" autocomplete="off" value="" placeholder="Timesheetcode..."/>
+						<input type="text" id="task-txt" data-bind="value: task" data-provide="typeahead" autocomplete="off" value="" placeholder="Description..."/>
+						<button class="btn" type="button" data-bind="click: addEntry"><i class="icon-plus"></i></button>
 					</div>
 				</fieldset>
 			</form>
@@ -39,8 +39,8 @@
 				<tr class="task-entry" data-bind="css: rowClass">					
 					<td class="tscode-field" data-bind="text: tsCode"></td>
 					<td class="task-field">
-						<span data-bind="text: task"></span>
-						<input type="text" class="input-inline-text" data-bind="value: task" title="Enter new value..." />
+						<span data-bind="text: task, visible: !inEditMode()"></span>
+						<input type="text" class="input-inline-text" data-bind="value: task, visible: inEditMode()" title="Enter new value..." />
 					</td>
 					<td class="datetime-field"><small>Start:</small> <span data-bind="text: startFormatted"></span></td>
 					<td class="button-group">
