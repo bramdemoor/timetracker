@@ -41,8 +41,7 @@
 		<div id="table-entries">
 			<h5 data-bind="text: today"></h5>
 			<table class="table table-hover table-condensed" data-bind="foreach: entries">
-				<tr class="task-entry">
-					<!-- Bind the class of the tr to 'warning' when TSCode is 'Break'. Bind it to 'error' when it is 'Stop' -->
+				<tr class="task-entry" data-bind="css: rowClass">					
 					<td class="tscode-field" data-bind="text: tsCode"></td>
 					<td class="task-field" data-bind="text: task"></td>
 					<td class="datetime-field"><small>Start:</small> <span data-bind="text: startFormatted"></span></td>

@@ -9,6 +9,11 @@ $(function() {
 		self.startFormatted = ko.computed(function() {
 			return moment(self.start()).format('h:mm');
 		});
+		self.rowClass = ko.computed(function() {
+			if(self.tsCode() == 'Break') return 'warning';
+			if(self.tsCode() == 'Stop') return 'error';
+			return '';
+		});
 	}
 
 	var viewModel = function() {
