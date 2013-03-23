@@ -14,6 +14,9 @@ $(function() {
 			if(self.tsCode() == 'Stop') return 'error';
 			return '';
 		});
+		self.isHovered = ko.computed(function() {
+			return true;
+		});
 	}
 
 	var viewModel = function() {

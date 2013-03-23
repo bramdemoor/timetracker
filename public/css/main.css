@@ -39,14 +39,6 @@ tr.task-entry td {
     vertical-align: middle !important;
 }
 
-.remove-btn {
-    display: none;
-}
-
-.edit-btn {
-    display: none;
-}
-
 .editable-inline.editable-container {
     margin-top: 3px;
 }

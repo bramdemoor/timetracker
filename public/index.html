@@ -41,8 +41,8 @@
 					<td class="task-field" data-bind="text: task"></td>
 					<td class="datetime-field"><small>Start:</small> <span data-bind="text: startFormatted"></span></td>
 					<td class="button-group">
-						<a href="#" class="edit-btn"><i class="icon-edit"></i></a>
-						<a href="#" class="remove-btn"><i class="icon-remove"></i></a>
+						<a href="#" class="edit-btn" data-bind="visible: isHovered"><i class="icon-edit"></i></a>
+						<a href="#" class="remove-btn" data-bind="visible: isHovered"><i class="icon-remove"></i></a>
 					</td>
 				</tr>
 			</table>
