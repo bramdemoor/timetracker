@@ -9,4 +9,5 @@
 <script src="Resources/js/jquery-migrate-1.1.1.min.js"></script>
 <script src="Resources/js/bootstrap-typeahead.js"></script>
 <script src="Resources/bootstrap-editable-1/bootstrap-editable/js/bootstrap-editable.js"></script>
+<script src="Resources/js/jquery.fileDownload.js"></script>
 <script src="Resources/js/main.js"></script>

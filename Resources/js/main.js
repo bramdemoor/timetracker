@@ -105,4 +105,17 @@ $(function() {
         });
         return false;
     });
+
+    $('#submit-export').click(function() {
+        $.ajax({
+            type: 'GET',
+            url: 'index.php?export&all',
+            datetype: 'json',
+            success: function(data) {
+                //TODO: put basepath in setting
+                var fname = '/timetracker/Exports/' + data[0].filename;
+                $.fileDownload(fname);
+            }
+        });
+    });
 });
