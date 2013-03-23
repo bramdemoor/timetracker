@@ -12,7 +12,7 @@
 	<script src="lib/jquery-migrate-1.1.1.min.js"></script>
 	<script src="lib/bootstrap-typeahead.js"></script>
 	<script src="bootstrap-editable-1/bootstrap-editable/js/bootstrap-editable.js"></script>
-	<script src="lib/jquery.fileDownload.js"></script>
+	<script src="lib/knockout-2.2.1.js"></script>
 	<script src="js/main.js"></script>
 </head>
 <body>
@@ -39,9 +39,9 @@
         </form>
     </div>
     <h3>Entries</h3>
-    <div id="table-entries"><!-- foreach entries -->
+    <div id="table-entries">
 		<h5>The date <!-- php format l d F Y --></h5>
-		<table class="table table-hover table-condensed" ><!-- Bind id of the table to "key" of the entry. Do a foreach binding on all values -->			
+		<table class="table table-hover table-condensed" data-bind="foreach: entries"><!-- Bind id of the table to "key" of the entry.-->			
 			<tr class="task-entry">
 				<!-- Bind the class of the tr to 'warning' when TSCode is 'Break'. Bind it to 'error' when it is 'Stop' -->
 				<td class="tscode-field">Code<!-- bind text to TSCode--></td>

@@ -1,5 +1,10 @@
 $(function() {
 
+	var viewModel = function() {
+		var self = this;
+		self.entries = ko.observableArray(['test','test2']);
+	}
+
     $('#tscode-txt').typeahead( {
         minLength: 1,
         source: function(typeahead, query) {
@@ -83,4 +88,6 @@ $(function() {
         });
         return false;
     });  
+	
+	ko.applyBindings(new viewModel());
 });
