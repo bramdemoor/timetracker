@@ -5,7 +5,10 @@ $(function() {
 		self.id = ko.observable(id);
 		self.tsCode = ko.observable(tsCode);
 		self.task = ko.observable(task);
-		self.start = ko.observable(start);
+		self.start = ko.observable(start);		
+		self.startFormatted = ko.computed(function() {
+			return moment(self.start()).format('h:mm');
+		});
 	}
 
 	var viewModel = function() {

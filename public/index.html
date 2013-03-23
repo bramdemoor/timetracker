@@ -17,7 +17,6 @@
 	<script src="js/main.js"></script>
 </head>
 <body>
-
 	<div class="container">
 		<div class="navbar">
 			<div class="navbar-inner">
@@ -44,9 +43,9 @@
 			<table class="table table-hover table-condensed" data-bind="foreach: entries">
 				<tr class="task-entry">
 					<!-- Bind the class of the tr to 'warning' when TSCode is 'Break'. Bind it to 'error' when it is 'Stop' -->
-					<td class="tscode-field">Code<!-- bind text to TSCode--></td>
-					<td class="task-field">Task<!-- bind text to 'Task' --></td>
-					<td class="datetime-field"><small>Start:</small> <span>Time<!-- Bind text to "Start" in php format 'H:i' --></span></td>
+					<td class="tscode-field" data-bind="text: tsCode"></td>
+					<td class="task-field" data-bind="text: task"></td>
+					<td class="datetime-field"><small>Start:</small> <span data-bind="text: startFormatted"></span></td>
 					<td class="button-group">
 						<a href="#" class="edit-btn"><i class="icon-edit"></i></a>
 						<a href="#" class="remove-btn"><i class="icon-remove"></i></a>
