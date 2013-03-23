@@ -5,7 +5,7 @@ $(function() {
         source: function(typeahead, query) {
             $.ajax({
                 type: 'GET',
-                url: 'index.php?entries&getTsCodes',
+                url: '/tsccodes',
                 dataType: 'json',
                 success: function(data) {
                     typeahead.process(data);
@@ -20,7 +20,7 @@ $(function() {
             source: function(typeahead, query) {
                 $.ajax({
                     type: 'GET',
-                    url: 'index.php?entries&getEntryNames',
+                    url: '/entrynames',
                     dataType: 'json',
                     success: function(data) {
                         typeahead.process(data);
@@ -41,14 +41,11 @@ $(function() {
         currentTablerow.children(".task-field").editable('toggle');
     });
 
-    $('.remove-btn').click(function() {
-        var $id = $(this).closest('tr').children('.task-field').attr('data-pk');
-        var rowElement = $(this).closest('tr');
+    $('.remove-btn').click(function() {               
         $.ajax({
             type: 'POST',
-            url: 'index.php?entries&removeEntry&pk=' + $id,
-            success: function() {
-                rowElement.remove();
+            url: '#',
+            success: function() {                
             }
         });
         return false;
@@ -59,23 +56,20 @@ $(function() {
     $('.task-field').editable({
         type: 'text',
         id: 'Task',
-        url: 'index.php',
+        url: '#',
         toggle: 'manual',
         inputclass:'input-inline-text',
         showbuttons: false,
         title: 'Enter new value...',
-        params: function(params) {
-            params.action = 'updateTaskDescription';
-            return params;
-        },
+        params: function(params) { return params; },
         ajaxOptions: {
             type: 'POST',
-            url: 'index.php?entries&updateTaskDescription'
+            url: '#'
             }
     });
 
     function idCurrentRow(element) {
-        return 'index.php?entries&updateTaskDescription&pk=50';
+        return '#';
     }
 
     $('#submit_btn').click(function() {
@@ -84,24 +78,8 @@ $(function() {
         var start = new Date().getTime();
         $.ajax({
             type: 'POST',
-            url: 'index.php?entries&createNewEntry&tsCode=' + tscode + '&description='+ descr +'&start='+ start,
-            success: function() {
-                var idDate = $.format.date(start, 'dd-MM-yyyy');
-                //check if current day is already present
-                if($('#' + idDate).length == 0) {
-                    $('#table-entries h5:first').before(
-                        '<h5>'+ $.format.date(start, 'ddd dd MMMM yyyy') +'</h5>' +
-                        '<table id="'+ idDate +'" class="table table-hover table-condensed"><tr></tr></table>');
-                }
-                $('#table-entries table:first tr:first').before(
-                    '<tr class="task-entry"><td class="tscode-field" >'+ tscode +
-                        '</td><td class="task-field" >'+ descr +
-                        '</td><td class="datetime-field"><small>Start:</small> '+ $.format.date(start, "HH:mm") +
-                        '</td><td class="button-group"><a href="#" class="edit-btn" style="display: none;"><i class="icon-edit">' +
-                        '</i></a><a href="#" class="remove-btn" style="display: none;"><i class="icon-remove"></i></a></td></tr>');
-                $('input#task-txt').val('');
-                $('input#tscode-txt').val('');
-            }
+            url: '#',
+            success: function() { }
         });
         return false;
     });  
